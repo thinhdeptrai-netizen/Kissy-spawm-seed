@@ -1,11 +1,10 @@
 --//=====================================================
---// PHANTOM B.FRUIT - BUFF LUCK FINAL EDITION
+--// PHANTOM B.FRUIT - FULL FINAL EDITION
 --//=====================================================
 
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
 local LP = Players.LocalPlayer
 
 --// ScreenGui
@@ -173,7 +172,6 @@ local ts = Instance.new("UIStroke", TradeUI)
 ts.Color = Color3.fromRGB(170,0,255)
 ts.Thickness = 2
 
--- Trade Title
 local tTitle = Instance.new("TextLabel", TradeUI)
 tTitle.Size = UDim2.new(1,0,0,28)
 tTitle.Position = UDim2.new(0,0,0,4)
@@ -261,16 +259,14 @@ LuckDisplay.Font = Enum.Font.GothamBlack
 LuckDisplay.TextSize = 40
 LuckDisplay.TextColor3 = Color3.fromRGB(255,255,255)
 
--- Run % animation with blink at 100%
 local function RunLuck()
 	LuckDisplay.Visible = true
 
 	for i = 1, 100 do
 		LuckDisplay.Text = "BUFF LUCK: "..i.."%"
-		task.wait(0.05) -- ~5s
+		task.wait(0.05)
 	end
 
-	-- Blink 100% for ~1 second
 	for n = 1, 10 do
 		LuckDisplay.Visible = false
 		task.wait(0.05)
@@ -293,6 +289,32 @@ end)
 CreateSliderToggle(Main, "BUFF LUCK☘️", 140, function(state)
 	LuckUI.Visible = state
 end)
+
+--// ================= WARNING TEXT (BOTTOM MAIN GUI) =================
+
+-- Vietnamese
+local warnVI = Instance.new("TextLabel", Main)
+warnVI.Size = UDim2.new(0.9,0,0,32)
+warnVI.Position = UDim2.new(0.05,0,0,185)
+warnVI.BackgroundTransparency = 1
+warnVI.TextWrapped = true
+warnVI.TextYAlignment = Enum.TextYAlignment.Top
+warnVI.Text = "⚠️WARNING⚠️: script trade scam đã anti ban cao nhất và hỗ trợ khán giả sài script tốt nhất, cảm ơn đã đọc"
+warnVI.Font = Enum.Font.Gotham
+warnVI.TextSize = 12
+warnVI.TextColor3 = Color3.fromRGB(255,200,200)
+
+-- English
+local warnEN = Instance.new("TextLabel", Main)
+warnEN.Size = UDim2.new(0.9,0,0,32)
+warnEN.Position = UDim2.new(0.05,0,0,220)
+warnEN.BackgroundTransparency = 1
+warnEN.TextWrapped = true
+warnEN.TextYAlignment = Enum.TextYAlignment.Top
+warnEN.Text = "⚠️WARNING⚠️: This script for trading scams has the highest anti-ban rating and provides the best support for its users. Thank you for reading."
+warnEN.Font = Enum.Font.Gotham
+warnEN.TextSize = 12
+warnEN.TextColor3 = Color3.fromRGB(200,200,255)
 
 --// ================= TRADE SLIDERS =================
 CreateSliderToggle(TradeUI, "Freeze Trade", 55, function(state)
