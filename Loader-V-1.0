@@ -1,5 +1,6 @@
 --//=====================================================
---// PHANTOM B.FRUIT - FULL FINAL EDITION
+--// PHANTOM VALENTINE ULTRA EDITION
+--// Hearts Background + Floating Hearts
 --//=====================================================
 
 local Players = game:GetService("Players")
@@ -9,26 +10,22 @@ local LP = Players.LocalPlayer
 
 --// ScreenGui
 local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
-ScreenGui.Name = "PHANTOM_BFRUIT"
+ScreenGui.Name = "PHANTOM_VALENTINE_ULTRA"
 ScreenGui.ResetOnSpawn = false
 
---// ================= TOGGLE ICON =================
+--// ================= TOGGLE BUTTON =================
 local ToggleBtn = Instance.new("TextButton", ScreenGui)
-ToggleBtn.Size = UDim2.fromOffset(45,45)
-ToggleBtn.Position = UDim2.new(0,20,0.5,-22)
-ToggleBtn.Text = "👻"
-ToggleBtn.Font = Enum.Font.GothamBold
-ToggleBtn.TextSize = 22
-ToggleBtn.BackgroundColor3 = Color3.fromRGB(20,20,20)
+ToggleBtn.Size = UDim2.fromOffset(50,50)
+ToggleBtn.Position = UDim2.new(0,20,0.5,-25)
+ToggleBtn.Text = "💖"
+ToggleBtn.Font = Enum.Font.GothamBlack
+ToggleBtn.TextSize = 24
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(255,120,170)
 ToggleBtn.TextColor3 = Color3.new(1,1,1)
 ToggleBtn.AutoButtonColor = false
-
 Instance.new("UICorner", ToggleBtn).CornerRadius = UDim.new(1,0)
-local tStroke = Instance.new("UIStroke", ToggleBtn)
-tStroke.Color = Color3.fromRGB(170,0,255)
-tStroke.Thickness = 2
 
--- Drag toggle
+-- Drag Toggle
 local dragging, dragStart, startPos
 ToggleBtn.InputBegan:Connect(function(i)
 	if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
@@ -37,11 +34,13 @@ ToggleBtn.InputBegan:Connect(function(i)
 		startPos = ToggleBtn.Position
 	end
 end)
+
 UIS.InputEnded:Connect(function(i)
 	if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
 		dragging = false
 	end
 end)
+
 UIS.InputChanged:Connect(function(i)
 	if dragging and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
 		local delta = i.Position - dragStart
@@ -51,95 +50,133 @@ end)
 
 --// ================= MAIN GUI =================
 local Main = Instance.new("Frame", ScreenGui)
-Main.Size = UDim2.fromOffset(370,260)
-Main.Position = UDim2.new(0.5,-185,0.5,-130)
-Main.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Main.Size = UDim2.fromOffset(300,180)
+Main.Position = UDim2.new(0.5,-210,0.5,-150)
+Main.BackgroundColor3 = Color3.fromRGB(40,0,30)
 Main.Visible = false
 Main.Active = true
 Main.Draggable = true
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0,28)
 
-Instance.new("UICorner", Main).CornerRadius = UDim.new(0,20)
+local mainStroke = Instance.new("UIStroke", Main)
+mainStroke.Color = Color3.fromRGB(255,80,160)
+mainStroke.Thickness = 2
 
-local mStroke = Instance.new("UIStroke", Main)
-mStroke.Thickness = 2
-
-local grad = Instance.new("UIGradient", mStroke)
-grad.Color = ColorSequence.new{
-	ColorSequenceKeypoint.new(0,Color3.fromRGB(170,0,255)),
-	ColorSequenceKeypoint.new(0.5,Color3.fromRGB(0,200,255)),
-	ColorSequenceKeypoint.new(1,Color3.fromRGB(255,0,180))
-}
-task.spawn(function()
-	while task.wait(0.03) do
-		grad.Rotation += 1
-	end
-end)
+--// ================= BACKGROUND FADED HEART =================
+local bigHeart = Instance.new("TextLabel", Main)
+bigHeart.Size = UDim2.new(1,0,1,0)
+bigHeart.BackgroundTransparency = 1
+bigHeart.Text = "💖"
+bigHeart.Font = Enum.Font.GothamBlack
+bigHeart.TextScaled = true
+bigHeart.TextColor3 = Color3.fromRGB(255,100,160)
+bigHeart.TextTransparency = 0.9
+bigHeart.ZIndex = 0
 
 --// ================= HEADER =================
 local Header = Instance.new("Frame", Main)
-Header.Size = UDim2.new(1,0,0,65)
-Header.BackgroundColor3 = Color3.fromRGB(22,22,22)
-Instance.new("UICorner", Header).CornerRadius = UDim.new(0,20)
+Header.Size = UDim2.new(1,0,0,80)
+Header.BackgroundColor3 = Color3.fromRGB(60,0,45)
+Instance.new("UICorner", Header).CornerRadius = UDim.new(0,28)
 
 local Title = Instance.new("TextLabel", Header)
-Title.Size = UDim2.new(1,0,0,32)
-Title.Position = UDim2.new(0,0,0,5)
+Title.Size = UDim2.new(1,0,0,50)
+Title.Position = UDim2.new(0,0,0,0)
 Title.BackgroundTransparency = 1
-Title.Text = "👻PHANTOM B.FRUIT🕸"
+Title.Text = "💘 PHANTOM VALENTINE 💘"
 Title.Font = Enum.Font.GothamBlack
-Title.TextSize = 22
-Title.TextColor3 = Color3.fromRGB(255,255,255)
+Title.TextSize = 24
+Title.TextColor3 = Color3.new(1,1,1)
 
-local SubTitle = Instance.new("TextLabel", Header)
-SubTitle.Size = UDim2.new(1,0,0,22)
-SubTitle.Position = UDim2.new(0,0,0,35)
-SubTitle.BackgroundTransparency = 1
-SubTitle.Text = "Made by rausenia"
-SubTitle.Font = Enum.Font.Gotham
-SubTitle.TextSize = 12
-SubTitle.TextColor3 = Color3.fromRGB(180,180,180)
+--// ================= CREDIT UNDER TITLE =================
+local Credit = Instance.new("TextLabel", Header)
+Credit.Size = UDim2.new(1,0,0,20)
+Credit.Position = UDim2.new(0,0,0,50)
+Credit.BackgroundTransparency = 1
+Credit.Text = "MADE BY QTHINH"
+Credit.Font = Enum.Font.GothamBold
+Credit.TextSize = 14
+Credit.TextColor3 = Color3.fromRGB(255,150,200)
+Credit.TextTransparency = 0.1
+
+local creditStroke = Instance.new("UIStroke", Credit)
+creditStroke.Color = Color3.fromRGB(255,100,170)
+creditStroke.Thickness = 1
+creditStroke.Transparency = 0.4
+
+--// ================= HEART FLOAT EFFECT =================
+local function CreateFloatingHeart()
+	local heart = Instance.new("TextLabel", Main)
+	heart.BackgroundTransparency = 1
+	heart.Text = "🌹"
+	heart.Font = Enum.Font.GothamBlack
+	heart.TextSize = math.random(14,26)
+	heart.TextColor3 = Color3.fromRGB(255, math.random(80,180), 200)
+	heart.Position = UDim2.new(math.random(),0,1,0)
+	heart.Size = UDim2.fromOffset(30,30)
+
+	local tween = TweenService:Create(heart, TweenInfo.new(
+		math.random(4,7),
+		Enum.EasingStyle.Linear
+	), {
+		Position = UDim2.new(math.random(),0,-0.2,0),
+		TextTransparency = 1
+	})
+
+	tween:Play()
+	tween.Completed:Connect(function()
+		heart:Destroy()
+	end)
+end
+
+task.spawn(function()
+	while true do
+		if Main.Visible then
+			CreateFloatingHeart()
+		end
+		task.wait(0.3)
+	end
+end)
 
 --// ================= SLIDER FUNCTION =================
 local function CreateSliderToggle(parent, text, y, callback)
 	local on = false
 
 	local holder = Instance.new("Frame", parent)
-	holder.Size = UDim2.new(0.85,0,0,36)
-	holder.Position = UDim2.new(0.075,0,0,y)
-	holder.BackgroundColor3 = Color3.fromRGB(30,30,30)
-	Instance.new("UICorner", holder).CornerRadius = UDim.new(0,12)
+	holder.Size = UDim2.new(0.8,0,0,40)
+	holder.Position = UDim2.new(0.1,0,0,y)
+	holder.BackgroundColor3 = Color3.fromRGB(90,0,60)
+	Instance.new("UICorner", holder).CornerRadius = UDim.new(0,18)
 
 	local label = Instance.new("TextLabel", holder)
-	label.Size = UDim2.new(0.65,0,1,0)
+	label.Size = UDim2.new(0.6,0,1,0)
 	label.BackgroundTransparency = 1
 	label.Text = text
 	label.Font = Enum.Font.GothamBold
-	label.TextSize = 14
+	label.TextSize = 15
 	label.TextColor3 = Color3.new(1,1,1)
 
 	local slider = Instance.new("Frame", holder)
-	slider.Size = UDim2.fromOffset(52,22)
-	slider.Position = UDim2.new(1,-65,0.5,-11)
-	slider.BackgroundColor3 = Color3.fromRGB(70,70,70)
+	slider.Size = UDim2.fromOffset(60,24)
+	slider.Position = UDim2.new(1,-75,0.5,-12)
+	slider.BackgroundColor3 = Color3.fromRGB(255,120,170)
 	Instance.new("UICorner", slider).CornerRadius = UDim.new(1,0)
 
 	local knob = Instance.new("Frame", slider)
-	knob.Size = UDim2.fromOffset(20,20)
-	knob.Position = UDim2.new(0,1,0.5,-10)
-	knob.BackgroundColor3 = Color3.fromRGB(230,230,230)
+	knob.Size = UDim2.fromOffset(22,22)
+	knob.Position = UDim2.new(0,1,0.5,-11)
+	knob.BackgroundColor3 = Color3.new(1,1,1)
 	Instance.new("UICorner", knob).CornerRadius = UDim.new(1,0)
 
 	local function refresh()
 		if on then
 			TweenService:Create(knob, TweenInfo.new(0.25), {
-				Position = UDim2.new(1,-21,0.5,-10)
+				Position = UDim2.new(1,-23,0.5,-11)
 			}):Play()
-			slider.BackgroundColor3 = Color3.fromRGB(150,0,255)
 		else
 			TweenService:Create(knob, TweenInfo.new(0.25), {
-				Position = UDim2.new(0,1,0.5,-10)
+				Position = UDim2.new(0,1,0.5,-11)
 			}):Play()
-			slider.BackgroundColor3 = Color3.fromRGB(70,70,70)
 		end
 
 		if callback then
@@ -155,177 +192,43 @@ local function CreateSliderToggle(parent, text, y, callback)
 	end)
 
 	refresh()
-	return holder
 end
 
---// ================= TRADE UI =================
+--// ================= TRADE WINDOW =================
 local TradeUI = Instance.new("Frame", ScreenGui)
-TradeUI.Size = UDim2.fromOffset(260,180)
-TradeUI.Position = UDim2.new(0.5,-130,0.5,-90)
-TradeUI.BackgroundColor3 = Color3.fromRGB(14,14,14)
+TradeUI.Size = UDim2.fromOffset(300,200)
+TradeUI.Position = UDim2.new(0.5,-150,0.5,-100)
+TradeUI.BackgroundColor3 = Color3.fromRGB(55,0,40)
 TradeUI.Visible = false
 TradeUI.Active = true
 TradeUI.Draggable = true
+Instance.new("UICorner", TradeUI).CornerRadius = UDim.new(0,22)
 
-Instance.new("UICorner", TradeUI).CornerRadius = UDim.new(0,16)
-local ts = Instance.new("UIStroke", TradeUI)
-ts.Color = Color3.fromRGB(170,0,255)
-ts.Thickness = 2
+local tStroke = Instance.new("UIStroke", TradeUI)
+tStroke.Color = Color3.fromRGB(255,100,170)
+tStroke.Thickness = 2
 
 local tTitle = Instance.new("TextLabel", TradeUI)
-tTitle.Size = UDim2.new(1,0,0,28)
-tTitle.Position = UDim2.new(0,0,0,4)
+tTitle.Size = UDim2.new(1,0,0,35)
 tTitle.BackgroundTransparency = 1
-tTitle.Text = "PHANTOM TRADE BF🧩"
+tTitle.Text = "💝 VALENTINE TRADE 💝"
 tTitle.Font = Enum.Font.GothamBlack
-tTitle.TextSize = 16
+tTitle.TextSize = 18
 tTitle.TextColor3 = Color3.new(1,1,1)
 
-local tSub = Instance.new("TextLabel", TradeUI)
-tSub.Size = UDim2.new(1,0,0,20)
-tSub.Position = UDim2.new(0,0,0,28)
-tSub.BackgroundTransparency = 1
-tSub.Text = "Made by Rausenia"
-tSub.Font = Enum.Font.Gotham
-tSub.TextSize = 12
-tSub.TextColor3 = Color3.fromRGB(180,180,180)
-
---// ================= BUFF LUCK UI =================
-local LuckUI = Instance.new("Frame", ScreenGui)
-LuckUI.Size = UDim2.fromOffset(300,200)
-LuckUI.Position = UDim2.new(0.5,-150,0.5,-100)
-LuckUI.BackgroundTransparency = 0.15
-LuckUI.BackgroundColor3 = Color3.fromRGB(20,20,20)
-LuckUI.Visible = false
-LuckUI.Active = true
-LuckUI.Draggable = true
-
-Instance.new("UICorner", LuckUI).CornerRadius = UDim.new(0,18)
-
-local luckStroke = Instance.new("UIStroke", LuckUI)
-luckStroke.Thickness = 2
-
-local luckGrad = Instance.new("UIGradient", luckStroke)
-luckGrad.Color = ColorSequence.new{
-	ColorSequenceKeypoint.new(0,Color3.fromRGB(255,0,0)),
-	ColorSequenceKeypoint.new(0.2,Color3.fromRGB(255,255,0)),
-	ColorSequenceKeypoint.new(0.4,Color3.fromRGB(0,255,0)),
-	ColorSequenceKeypoint.new(0.6,Color3.fromRGB(0,255,255)),
-	ColorSequenceKeypoint.new(0.8,Color3.fromRGB(0,0,255)),
-	ColorSequenceKeypoint.new(1,Color3.fromRGB(255,0,255)),
-}
-task.spawn(function()
-	while task.wait(0.02) do
-		luckGrad.Rotation += 1
-	end
-end)
-
-local luckTitle = Instance.new("TextLabel", LuckUI)
-luckTitle.Size = UDim2.new(1,0,0,40)
-luckTitle.BackgroundTransparency = 1
-luckTitle.Text = "☘️ BUFF LUCK ☘️"
-luckTitle.Font = Enum.Font.GothamBlack
-luckTitle.TextSize = 20
-luckTitle.TextColor3 = Color3.new(1,1,1)
-
-local luckBox = Instance.new("TextBox", LuckUI)
-luckBox.Size = UDim2.new(0.8,0,0,36)
-luckBox.Position = UDim2.new(0.1,0,0,60)
-luckBox.PlaceholderText = "Enter code / name..."
-luckBox.Text = ""
-luckBox.Font = Enum.Font.Gotham
-luckBox.TextSize = 14
-luckBox.BackgroundColor3 = Color3.fromRGB(30,30,30)
-luckBox.TextColor3 = Color3.new(1,1,1)
-Instance.new("UICorner", luckBox).CornerRadius = UDim.new(0,12)
-
-local activeBtn = Instance.new("TextButton", LuckUI)
-activeBtn.Size = UDim2.new(0.6,0,0,40)
-activeBtn.Position = UDim2.new(0.2,0,0,120)
-activeBtn.Text = "ACTIVE LUCK🤖"
-activeBtn.Font = Enum.Font.GothamBold
-activeBtn.TextSize = 16
-activeBtn.BackgroundColor3 = Color3.fromRGB(120,0,200)
-activeBtn.TextColor3 = Color3.new(1,1,1)
-Instance.new("UICorner", activeBtn).CornerRadius = UDim.new(0,14)
-
---// ================= LUCK DISPLAY =================
-local LuckDisplay = Instance.new("TextLabel", ScreenGui)
-LuckDisplay.Size = UDim2.new(1,0,0,60)
-LuckDisplay.Position = UDim2.new(0,0,0.4,0)
-LuckDisplay.BackgroundTransparency = 1
-LuckDisplay.Visible = false
-LuckDisplay.Font = Enum.Font.GothamBlack
-LuckDisplay.TextSize = 40
-LuckDisplay.TextColor3 = Color3.fromRGB(255,255,255)
-
-local function RunLuck()
-	LuckDisplay.Visible = true
-
-	for i = 1, 100 do
-		LuckDisplay.Text = "BUFF LUCK: "..i.."%"
-		task.wait(0.05)
-	end
-
-	for n = 1, 10 do
-		LuckDisplay.Visible = false
-		task.wait(0.05)
-		LuckDisplay.Visible = true
-		task.wait(0.05)
-	end
-
-	LuckDisplay.Visible = false
-end
-
-activeBtn.MouseButton1Click:Connect(function()
-	task.spawn(RunLuck)
-end)
-
---// ================= MAIN SLIDERS =================
-CreateSliderToggle(Main, "TRADE MENU", 90, function(state)
+CreateSliderToggle(Main, "OPEN TRADE MENU 💕", 110, function(state)
 	TradeUI.Visible = state
 end)
 
-CreateSliderToggle(Main, "BUFF LUCK☘️", 140, function(state)
-	LuckUI.Visible = state
+CreateSliderToggle(TradeUI, "Freeze Trade 💔", 70, function(state)
+	print("Freeze:", state)
 end)
 
---// ================= WARNING TEXT (BOTTOM MAIN GUI) =================
-
--- Vietnamese
-local warnVI = Instance.new("TextLabel", Main)
-warnVI.Size = UDim2.new(0.9,0,0,32)
-warnVI.Position = UDim2.new(0.05,0,0,185)
-warnVI.BackgroundTransparency = 1
-warnVI.TextWrapped = true
-warnVI.TextYAlignment = Enum.TextYAlignment.Top
-warnVI.Text = "⚠️WARNING⚠️: script trade scam đã anti ban cao nhất và hỗ trợ khán giả sài script tốt nhất, cảm ơn đã đọc"
-warnVI.Font = Enum.Font.Gotham
-warnVI.TextSize = 12
-warnVI.TextColor3 = Color3.fromRGB(255,200,200)
-
--- English
-local warnEN = Instance.new("TextLabel", Main)
-warnEN.Size = UDim2.new(0.9,0,0,32)
-warnEN.Position = UDim2.new(0.05,0,0,220)
-warnEN.BackgroundTransparency = 1
-warnEN.TextWrapped = true
-warnEN.TextYAlignment = Enum.TextYAlignment.Top
-warnEN.Text = "⚠️WARNING⚠️: This script for trading scams has the highest anti-ban rating and provides the best support for its users. Thank you for reading."
-warnEN.Font = Enum.Font.Gotham
-warnEN.TextSize = 12
-warnEN.TextColor3 = Color3.fromRGB(200,200,255)
-
---// ================= TRADE SLIDERS =================
-CreateSliderToggle(TradeUI, "Freeze Trade", 55, function(state)
-	print("Freeze Trade:", state)
+CreateSliderToggle(TradeUI, "Auto Accept 💌", 120, function(state)
+	print("AutoAccept:", state)
 end)
 
-CreateSliderToggle(TradeUI, "Auto Accept", 100, function(state)
-	print("Auto Accept:", state)
-end)
-
---// ================= MAIN TOGGLE =================
+--// ================= TOGGLE MAIN =================
 ToggleBtn.MouseButton1Click:Connect(function()
 	Main.Visible = not Main.Visible
 end)
